@@ -13,15 +13,13 @@ public static class StoreServiceExtensions
         {
             var cosmosClient = new CosmosClient(connectionString, new CosmosClientOptions
             {
-                ApplicationName = "Swetugg - Roslyn",
+                ApplicationName = ".NET Days Warsaw - Roslyn",
                 EnableContentResponseOnWrite = false,
 
                 Serializer = new CosmosSystemTextJsonSerializer(),
-
-                ApplicationPreferredRegions = ["Sweden Central"],
             });
 
-            var database = cosmosClient.GetDatabase("Swetugg-Demo");
+            var database = cosmosClient.GetDatabase("dotnet-days-warsaw-demo");
             var container = database.GetContainer("Customers");
 
             return new CosmosEventStore(container);
