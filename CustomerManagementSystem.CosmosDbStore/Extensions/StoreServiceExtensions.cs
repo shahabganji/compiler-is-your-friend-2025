@@ -19,7 +19,7 @@ public static class StoreServiceExtensions
                 Serializer = new CosmosSystemTextJsonSerializer(),
             });
 
-            var database = cosmosClient.GetDatabase("dotnet-days-warsaw-demo");
+            var database = cosmosClient.GetDatabase("dotnet-linz-demo");
             var container = database.GetContainer("Customers");
 
             return new CosmosEventStore(container);
