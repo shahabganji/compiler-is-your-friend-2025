@@ -11,10 +11,10 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\CustomerManagementSystem.Analyzers\CustomerManagementSystem.Analyzers.Package\CustomerManagementSystem.Analyzers.Package.csproj"
+        <ProjectReference Include="..\..\Analyzers\CustomerManagementSystem.Analyzers.Package\CustomerManagementSystem.Analyzers.Package.csproj"
                           OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
 
-        <ProjectReference Include="..\CustomerManagementSystem.EventStoreSrouceGenerator\CustomerManagementSystem.EventStoreSrouceGenerator\CustomerManagementSystem.EventStoreSrouceGenerator.csproj"
+        <ProjectReference Include="..\..\SourceGenerator\CustomerManagementSystem.EventStoreSrouceGenerator\CustomerManagementSystem.EventStoreSrouceGenerator.csproj"
                           OutputItemType="Analyzer" ReferenceOutputAssembly="false"/>
     </ItemGroup>
 </Project>
