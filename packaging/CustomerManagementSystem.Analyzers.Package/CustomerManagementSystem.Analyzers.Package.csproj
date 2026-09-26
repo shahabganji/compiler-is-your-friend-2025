@@ -1,0 +1,53 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+        <NoWarn>$(NoWarn);NU5128</NoWarn>
+        <IsPackable>true</IsPackable>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Analyzers\CustomerManagementSystem.Analyzers\CustomerManagementSystem.Analyzers.csproj"/>
+        <ProjectReference Include="..\..\src\Analyzers\CustomerManagementSystem.CodeFixProviders\CustomerManagementSystem.CodeFixProviders.csproj"/>
+        <ProjectReference Include="..\..\src\SourceGenerator\CustomerManagementSystem.EventStoreSrouceGenerator\CustomerManagementSystem.EventStoreSrouceGenerator.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Package the analyzer, code fix provider, and source generator assemblies into analyzers/dotnet/cs -->
+        <None Include="..\..\src\Analyzers\CustomerManagementSystem.Analyzers\bin\$(Configuration)\netstandard2.0\CustomerManagementSystem.Analyzers.dll"
+              Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+        <None Include="..\..\src\Analyzers\CustomerManagementSystem.CodeFixProviders\bin\$(Configuration)\netstandard2.0\CustomerManagementSystem.CodeFixProviders.dll"
+              Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+        <None Include="..\..\src\SourceGenerator\CustomerManagementSystem.EventStoreSrouceGenerator\bin\$(Configuration)\netstandard2.0\CustomerManagementSystem.EventStoreSrouceGenerator.dll"
+              Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    </ItemGroup>
+
+    <Target Name="GetTargetPath"
+            DependsOnTargets="ResolveProjectReferences"
+            Returns="@(TargetPathWithTargetPlatformMoniker)">
+        <ItemGroup>
+            <TargetPathWithTargetPlatformMoniker Include="@(ProjectReference->'%(RootDir)%(Directory)bin\$(Configuration)\netstandard2.0\%(Filename).dll')">
+                <TargetPlatformMoniker>$(TargetPlatformMoniker)</TargetPlatformMoniker>
+            </TargetPathWithTargetPlatformMoniker>
+            <TargetPathWithTargetPlatformMoniker Include="$(TargetPath)" Condition="Exists('$(TargetPath)')">
+                <TargetPlatformMoniker>$(TargetPlatformMoniker)</TargetPlatformMoniker>
+            </TargetPathWithTargetPlatformMoniker>
+        </ItemGroup>
+    </Target>
+
+    <Target Name="PublishToLocalNuGet" AfterTargets="Pack">
+        <ItemGroup>
+            <GeneratedPackages Include="@(NuGetPackOutput)" Condition="'%(Extension)' == '.nupkg' or '%(Extension)' == '.snupkg'" />
+        </ItemGroup>
+        <MakeDir Directories="/Users/shahab-the-guy/dev/local-nuget" Condition="!Exists('/Users/shahab-the-guy/dev/local-nuget')" />
+        <Copy SourceFiles="@(GeneratedPackages)"
+              DestinationFolder="/Users/shahab-the-guy/dev/local-nuget"
+              SkipUnchangedFiles="false" />
+        <Message Importance="high" Text="Published @(GeneratedPackages) to /Users/shahab-the-guy/dev/local-nuget" />
+    </Target>
+
+</Project>

@@ -1,6 +1,9 @@
 <Solution>
+  <Folder Name="/packaging/">
+    <File Path="packaging/pack.sh" />
+    <Project Path="packaging/CustomerManagementSystem.Analyzers.Package/CustomerManagementSystem.Analyzers.Package.csproj" />
+  </Folder>
   <Folder Name="/src/Analyzers/">
-    <Project Path="src/Analyzers/CustomerManagementSystem.Analyzers.Package/CustomerManagementSystem.Analyzers.Package.csproj" />
     <Project Path="src/Analyzers/CustomerManagementSystem.Analyzers/CustomerManagementSystem.Analyzers.csproj" />
     <Project Path="src/Analyzers/CustomerManagementSystem.CodeFixProviders/CustomerManagementSystem.CodeFixProviders.csproj" />
   </Folder>
