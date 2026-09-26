@@ -20,7 +20,7 @@ public class DiagnosticTestUtilities
             TestState =
             {
                 Sources = { source },
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net90,
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net100,
                 AdditionalReferences =
                 {
                     MetadataReference.CreateFromFile(typeof(None).Assembly.Location),
@@ -44,7 +44,7 @@ public class DiagnosticTestUtilities
             TestState =
             {
                 Sources = { source },
-                ReferenceAssemblies = ReferenceAssemblies.Net.Net90,
+                ReferenceAssemblies = ReferenceAssemblies.Net.Net100,
                 AdditionalReferences =
                 {
                     MetadataReference.CreateFromFile(typeof(None).Assembly.Location),

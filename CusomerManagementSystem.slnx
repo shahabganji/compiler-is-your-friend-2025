@@ -1,0 +1,22 @@
+<Solution>
+  <Folder Name="/Analyzers/">
+    <Project Path="CustomerManagementSystem.Analyzers/CustomerManagementSystem.Analyzers/CustomerManagementSystem.Analyzers.csproj" />
+    <Project Path="CustomerManagementSystem.Analyzers/CustomerManagementSystem.Analyzers.Tests/CustomerManagementSystem.Analyzers.Tests.csproj" />
+  </Folder>
+  <Folder Name="/App/">
+    <Project Path="CustomerManagementSystem.Api.Contracts/CustomerManagementSystem.Api.Contracts.csproj" />
+    <Project Path="CustomerManagementSystem.Api/CustomerManagementSystem.Api.csproj" />
+    <Project Path="CustomerManagementSystem.CosmosDbStore/CustomerManagementSystem.CosmosDbStore.csproj" />
+    <Project Path="CustomerManagementSystem.Domain/CustomerManagementSystem.Domain.csproj" />
+    <Project Path="CustomerManagementSystem.WebApp/CustomerManagementSystem.WebApp.csproj" />
+  </Folder>
+  <Folder Name="/SolutionFolder/">
+    <File Path=".gitignore" />
+    <File Path="Directory.Packages.props" />
+    <File Path="global.json" />
+  </Folder>
+  <Folder Name="/SourceGenerator/">
+    <Project Path="CustomerManagementSystem.EventStoreSrouceGenerator/CustomerManagementSystem.EventStoreSrouceGenerator/CustomerManagementSystem.EventStoreSrouceGenerator.csproj" />
+    <Project Path="CustomerManagementSystem.EventStoreSrouceGenerator/CustomerManagementSystem.EventStoreSrouceGenerator.Tests/CustomerManagementSystem.EventStoreSrouceGenerator.Tests.csproj" />
+  </Folder>
+</Solution>
