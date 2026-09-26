@@ -1,6 +1,8 @@
 <Solution>
   <Folder Name="/Analyzers/">
     <Project Path="CustomerManagementSystem.Analyzers/CustomerManagementSystem.Analyzers/CustomerManagementSystem.Analyzers.csproj" />
+    <Project Path="CustomerManagementSystem.Analyzers/CustomerManagementSystem.CodeFixProviders/CustomerManagementSystem.CodeFixProviders.csproj" />
+    <Project Path="CustomerManagementSystem.Analyzers/CustomerManagementSystem.Analyzers.Package/CustomerManagementSystem.Analyzers.Package.csproj" />
     <Project Path="CustomerManagementSystem.Analyzers/CustomerManagementSystem.Analyzers.Tests/CustomerManagementSystem.Analyzers.Tests.csproj" />
   </Folder>
   <Folder Name="/App/">

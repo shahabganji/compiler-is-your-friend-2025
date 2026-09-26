@@ -24,6 +24,7 @@
     <ItemGroup>
         <ProjectReference Include="..\..\CustomerManagementSystem.Api\CustomerManagementSystem.Api.csproj"/>
         <ProjectReference Include="..\CustomerManagementSystem.Analyzers\CustomerManagementSystem.Analyzers.csproj"/>
+        <ProjectReference Include="..\CustomerManagementSystem.CodeFixProviders\CustomerManagementSystem.CodeFixProviders.csproj"/>
     </ItemGroup>
 
 </Project>

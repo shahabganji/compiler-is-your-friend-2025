@@ -8,9 +8,7 @@
 
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
         <IsRoslynComponent>true</IsRoslynComponent>
-
-        <RootNamespace>CustomerManagementSystem.Analyzers</RootNamespace>
-        <AssemblyName>CustomerManagementSystem.Analyzers</AssemblyName>
+        
     </PropertyGroup>
 
     <ItemGroup>
@@ -19,21 +17,25 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
 
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces"/>
     </ItemGroup>
 
     <ItemGroup>
-        <EmbeddedResource Update="Resources.resx">
+        <ProjectReference Include="..\CustomerManagementSystem.Analyzers\CustomerManagementSystem.Analyzers.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <EmbeddedResource Update="CodeFixResources.resx">
             <Generator>ResXFileCodeGenerator</Generator>
-            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+            <LastGenOutput>CodeFixResources.Designer.cs</LastGenOutput>
         </EmbeddedResource>
     </ItemGroup>
 
     <ItemGroup>
-        <Compile Update="Resources.Designer.cs">
+        <Compile Update="CodeFixResources.Designer.cs">
             <DesignTime>True</DesignTime>
             <AutoGen>True</AutoGen>
-            <DependentUpon>Resources.resx</DependentUpon>
+            <DependentUpon>CodeFixResources.resx</DependentUpon>
         </Compile>
     </ItemGroup>
 

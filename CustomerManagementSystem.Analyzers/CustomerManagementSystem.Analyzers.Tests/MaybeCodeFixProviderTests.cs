@@ -1,9 +1,10 @@
 using System.Threading.Tasks;
+using CustomerManagementSystem.CodeFixProviders;
 using Microsoft.CodeAnalysis.Testing;
 using Xunit;
 using Verifier = Microsoft.CodeAnalysis.CSharp.Testing.CSharpCodeFixVerifier<
     CustomerManagementSystem.Analyzers.MaybeSemanticAnalyzer,
-    CustomerManagementSystem.Analyzers.MaybeCodeFixProvider,
+    CustomerManagementSystem.CodeFixProviders.MaybeCodeFixProvider,
     Microsoft.CodeAnalysis.Testing.DefaultVerifier>;
 
 namespace CustomerManagementSystem.Analyzers.Tests;

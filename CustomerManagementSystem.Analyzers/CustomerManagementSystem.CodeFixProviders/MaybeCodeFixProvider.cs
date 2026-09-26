@@ -3,6 +3,7 @@ using System.Composition;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using CustomerManagementSystem.Analyzers;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeActions;
 using Microsoft.CodeAnalysis.CodeFixes;
@@ -11,14 +12,13 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Formatting;
 using static Microsoft.CodeAnalysis.CSharp.SyntaxFactory;
 
-namespace CustomerManagementSystem.Analyzers;
+namespace CustomerManagementSystem.CodeFixProviders;
 
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(MaybeCodeFixProvider)), Shared]
 public class MaybeCodeFixProvider : CodeFixProvider
 {
     // Specify the diagnostic IDs of analyzers that are expected to be linked.
-    public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } =
-        ImmutableArray.Create(MaybeSemanticAnalyzer.DiagnosticId);
+    public sealed override ImmutableArray<string> FixableDiagnosticIds { get; } = [MaybeSemanticAnalyzer.DiagnosticId];
 
     // If you don't need the 'fix all' behaviour, return null.
     public override FixAllProvider? GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
@@ -44,9 +44,9 @@ public class MaybeCodeFixProvider : CodeFixProvider
         // Register a code action that will invoke the fix.
         context.RegisterCodeFix(
             CodeAction.Create(
-                title: string.Format(Resources.SHG001CodeFixTitle, "Maybe.None", "throw"),
+                title: string.Format(CodeFixResources.SHG001CodeFixTitle, "Maybe.None", "throw"),
                 token => ReplaceThrowWithReturnStatement(context.Document, throwStatementSyntax, token),
-                equivalenceKey: nameof(Resources.SHG001CodeFixTitle)),
+                equivalenceKey: nameof(CodeFixResources.SHG001CodeFixTitle)),
             diagnostic
         );
     }
