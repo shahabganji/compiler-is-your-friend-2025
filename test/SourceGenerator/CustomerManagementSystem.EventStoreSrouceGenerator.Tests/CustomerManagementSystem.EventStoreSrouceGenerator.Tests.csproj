@@ -5,9 +5,12 @@
         <Nullable>enable</Nullable>
 
         <IsPackable>false</IsPackable>
+
+        <RootNamespace>CustomerManagementSystem.EventStoreSrouceGenerator.Tests</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.SourceGenerators.Testing"/>
         <PackageReference Include="Microsoft.NET.Test.Sdk"/>
         <PackageReference Include="xunit.v3"/>
         <PackageReference Include="xunit.runner.visualstudio">
@@ -17,14 +20,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing"/>
-        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing"/>
+        <!--        https://github.com/dotnet/roslyn-analyzers/blob/main/docs/rules/RS1038.md -->
+        <!--        Due to 👆issue the following package should not be in the source generator project -->
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\CustomerManagementSystem.Api\CustomerManagementSystem.Api.csproj"/>
-        <ProjectReference Include="..\CustomerManagementSystem.Analyzers\CustomerManagementSystem.Analyzers.csproj"/>
-        <ProjectReference Include="..\CustomerManagementSystem.CodeFixProviders\CustomerManagementSystem.CodeFixProviders.csproj"/>
+        <ProjectReference Include="..\..\..\src\SourceGenerator\CustomerManagementSystem.EventStoreSrouceGenerator\CustomerManagementSystem.EventStoreSrouceGenerator.csproj"/>
     </ItemGroup>
+
 
 </Project>
