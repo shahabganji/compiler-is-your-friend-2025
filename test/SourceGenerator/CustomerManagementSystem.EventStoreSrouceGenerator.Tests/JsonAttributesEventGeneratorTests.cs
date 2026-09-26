@@ -45,20 +45,20 @@ public class JsonAttributesEventGeneratorTests
 
         // We need to create a compilation with the required source code.
         var compilation = CSharpCompilation.Create(nameof(JsonAttributesEventGenerator),
-            [CSharpSyntaxTree.ParseText(SourceTextWithFileScopedNamespace)],
+            [CSharpSyntaxTree.ParseText(SourceTextWithFileScopedNamespace, cancellationToken: TestContext.Current.CancellationToken)],
             [
                 // To support 'System.Attribute' inheritance, add reference to 'System.Private.CoreLib'.
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
             ]);
 
         // Run generators and retrieve all results.
-        var runResult = driver.RunGenerators(compilation).GetRunResult();
+        var runResult = driver.RunGenerators(compilation, TestContext.Current.CancellationToken).GetRunResult();
 
         // All generated files can be found in 'RunResults.GeneratedTrees'.
         var generatedFileSyntax = runResult.GeneratedTrees.Single(t => t.FilePath.EndsWith("EventsJsonAttributes.g.cs"));
 
         // Complex generators should be tested using text comparison.
-        Assert.Equal(ExpectedGeneratedClassText, generatedFileSyntax.GetText().ToString(),
+        Assert.Equal(ExpectedGeneratedClassText, generatedFileSyntax.GetText(TestContext.Current.CancellationToken).ToString(),
             ignoreLineEndingDifferences: true);
     }
 
@@ -87,20 +87,20 @@ public class JsonAttributesEventGeneratorTests
 
         // We need to create a compilation with the required source code.
         var compilation = CSharpCompilation.Create(nameof(JsonAttributesEventGenerator),
-            [CSharpSyntaxTree.ParseText(SourceTextWithNormalNamespace)],
+            [CSharpSyntaxTree.ParseText(SourceTextWithNormalNamespace, cancellationToken: TestContext.Current.CancellationToken)],
             [
                 // To support 'System.Attribute' inheritance, add reference to 'System.Private.CoreLib'.
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
             ]);
 
         // Run generators and retrieve all results.
-        var runResult = driver.RunGenerators(compilation).GetRunResult();
+        var runResult = driver.RunGenerators(compilation, TestContext.Current.CancellationToken).GetRunResult();
 
         // All generated files can be found in 'RunResults.GeneratedTrees'.
         var generatedFileSyntax = runResult.GeneratedTrees.Single(t => t.FilePath.EndsWith("EventsJsonAttributes.g.cs"));
 
         // Complex generators should be tested using text comparison.
-        Assert.Equal(ExpectedGeneratedClassText, generatedFileSyntax.GetText().ToString(),
+        Assert.Equal(ExpectedGeneratedClassText, generatedFileSyntax.GetText(TestContext.Current.CancellationToken).ToString(),
             ignoreLineEndingDifferences: true);
     }
 
@@ -183,20 +183,20 @@ public class JsonAttributesEventGeneratorTests
 
         // We need to create a compilation with the required source code.
         var compilation = CSharpCompilation.Create(nameof(JsonAttributesEventGenerator),
-            [CSharpSyntaxTree.ParseText(SourceTextWithDifferentNamespace)],
+            [CSharpSyntaxTree.ParseText(SourceTextWithDifferentNamespace, cancellationToken: TestContext.Current.CancellationToken)],
             [
                 // To support 'System.Attribute' inheritance, add reference to 'System.Private.CoreLib'.
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
             ]);
 
         // Run generators and retrieve all results.
-        var runResult = driver.RunGenerators(compilation).GetRunResult();
+        var runResult = driver.RunGenerators(compilation, TestContext.Current.CancellationToken).GetRunResult();
 
         // All generated files can be found in 'RunResults.GeneratedTrees'.
         var generatedFileSyntax = runResult.GeneratedTrees.Single(t => t.FilePath.EndsWith("EventsJsonAttributes.g.cs"));
 
         // Complex generators should be tested using text comparison.
-        Assert.Equal(ExpectedWhenHavingDifferentNamespaces, generatedFileSyntax.GetText().ToString(),
+        Assert.Equal(ExpectedWhenHavingDifferentNamespaces, generatedFileSyntax.GetText(TestContext.Current.CancellationToken).ToString(),
             ignoreLineEndingDifferences: true);
     }
 
@@ -211,20 +211,20 @@ public class JsonAttributesEventGeneratorTests
 
         // We need to create a compilation with the required source code.
         var compilation = CSharpCompilation.Create(nameof(JsonAttributesEventGenerator),
-            [CSharpSyntaxTree.ParseText(SourceTextWithSubNamespace)],
+            [CSharpSyntaxTree.ParseText(SourceTextWithSubNamespace, cancellationToken: TestContext.Current.CancellationToken)],
             [
                 // To support 'System.Attribute' inheritance, add reference to 'System.Private.CoreLib'.
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
             ]);
 
         // Run generators and retrieve all results.
-        var runResult = driver.RunGenerators(compilation).GetRunResult();
+        var runResult = driver.RunGenerators(compilation, TestContext.Current.CancellationToken).GetRunResult();
 
         // All generated files can be found in 'RunResults.GeneratedTrees'.
         var generatedFileSyntax = runResult.GeneratedTrees.Single(t => t.FilePath.EndsWith("EventsJsonAttributes.g.cs"));
 
         // Complex generators should be tested using text comparison.
-        Assert.Equal(ExpectedWhenHavingSubtNamespaces, generatedFileSyntax.GetText().ToString(),
+        Assert.Equal(ExpectedWhenHavingSubtNamespaces, generatedFileSyntax.GetText(TestContext.Current.CancellationToken).ToString(),
             ignoreLineEndingDifferences: true);
     }
 

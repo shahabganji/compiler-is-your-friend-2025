@@ -51,20 +51,20 @@ public class AggregatePartialMethodGeneratorTests
 
         // We need to create a compilation with the required source code.
         var compilation = CSharpCompilation.Create(nameof(JsonAttributesEventGenerator),
-            [CSharpSyntaxTree.ParseText(sourceTextWithFileScopedNamespace)],
+            [CSharpSyntaxTree.ParseText(sourceTextWithFileScopedNamespace, cancellationToken: TestContext.Current.CancellationToken)],
             [
                 // To support 'System.Attribute' inheritance, add reference to 'System.Private.CoreLib'.
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
             ]);
 
         // Run generators and retrieve all results.
-        var runResult = driver.RunGenerators(compilation).GetRunResult();
+        var runResult = driver.RunGenerators(compilation, TestContext.Current.CancellationToken).GetRunResult();
 
         // All generated files can be found in 'RunResults.GeneratedTrees'.
         var generatedFileSyntax = runResult.GeneratedTrees.Single(t => t.FilePath.EndsWith("CustomerAggregate.PartialMethods.g.cs"));
 
         // Complex generators should be tested using text comparison.
-        Assert.Equal(expectedGeneratedClassText, generatedFileSyntax.GetText().ToString(),
+        Assert.Equal(expectedGeneratedClassText, generatedFileSyntax.GetText(TestContext.Current.CancellationToken).ToString(),
             ignoreLineEndingDifferences: true);
     }
     
@@ -118,20 +118,20 @@ public class AggregatePartialMethodGeneratorTests
 
         // We need to create a compilation with the required source code.
         var compilation = CSharpCompilation.Create(nameof(JsonAttributesEventGenerator),
-            [CSharpSyntaxTree.ParseText(sourceTextWithFileScopedNamespace)],
+            [CSharpSyntaxTree.ParseText(sourceTextWithFileScopedNamespace, cancellationToken: TestContext.Current.CancellationToken)],
             [
                 // To support 'System.Attribute' inheritance, add reference to 'System.Private.CoreLib'.
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
             ]);
 
         // Run generators and retrieve all results.
-        var runResult = driver.RunGenerators(compilation).GetRunResult();
+        var runResult = driver.RunGenerators(compilation, TestContext.Current.CancellationToken).GetRunResult();
 
         // All generated files can be found in 'RunResults.GeneratedTrees'.
         var generatedFileSyntax = runResult.GeneratedTrees.Single(t => t.FilePath.EndsWith("CustomerAggregate.PartialMethods.g.cs"));
 
         // Complex generators should be tested using text comparison.
-        Assert.Equal(expectedGeneratedClassText, generatedFileSyntax.GetText().ToString(),
+        Assert.Equal(expectedGeneratedClassText, generatedFileSyntax.GetText(TestContext.Current.CancellationToken).ToString(),
             ignoreLineEndingDifferences: true);
     }
     
@@ -210,23 +210,23 @@ public class AggregatePartialMethodGeneratorTests
 
         // We need to create a compilation with the required source code.
         var compilation = CSharpCompilation.Create(nameof(JsonAttributesEventGenerator),
-            [CSharpSyntaxTree.ParseText(sourceTextWithFileScopedNamespace)],
+            [CSharpSyntaxTree.ParseText(sourceTextWithFileScopedNamespace, cancellationToken: TestContext.Current.CancellationToken)],
             [
                 // To support 'System.Attribute' inheritance, add reference to 'System.Private.CoreLib'.
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
             ]);
 
         // Run generators and retrieve all results.
-        var runResult = driver.RunGenerators(compilation).GetRunResult();
+        var runResult = driver.RunGenerators(compilation, TestContext.Current.CancellationToken).GetRunResult();
 
         // All generated files can be found in 'RunResults.GeneratedTrees'.
         var generatedFileForCustomerAggregate = runResult.GeneratedTrees.Single(t => t.FilePath.EndsWith("CustomerAggregate.PartialMethods.g.cs"));
         var generatedFileForBasketAggregate = runResult.GeneratedTrees.Single(t => t.FilePath.EndsWith("BasketAggregate.PartialMethods.g.cs"));
 
         // Complex generators should be tested using text comparison.
-        Assert.Equal(expectedTextForCustomerAggregate, generatedFileForCustomerAggregate.GetText().ToString(),
+        Assert.Equal(expectedTextForCustomerAggregate, generatedFileForCustomerAggregate.GetText(TestContext.Current.CancellationToken).ToString(),
             ignoreLineEndingDifferences: true);
-        Assert.Equal(expectedTextForBasketAggregate, generatedFileForBasketAggregate.GetText().ToString(),
+        Assert.Equal(expectedTextForBasketAggregate, generatedFileForBasketAggregate.GetText(TestContext.Current.CancellationToken).ToString(),
             ignoreLineEndingDifferences: true);
     }
     
@@ -274,20 +274,20 @@ public class AggregatePartialMethodGeneratorTests
 
         // We need to create a compilation with the required source code.
         var compilation = CSharpCompilation.Create(nameof(JsonAttributesEventGenerator),
-            [CSharpSyntaxTree.ParseText(sourceTextWithFileScopedNamespace)],
+            [CSharpSyntaxTree.ParseText(sourceTextWithFileScopedNamespace, cancellationToken: TestContext.Current.CancellationToken)],
             [
                 // To support 'System.Attribute' inheritance, add reference to 'System.Private.CoreLib'.
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location)
             ]);
 
         // Run generators and retrieve all results.
-        var runResult = driver.RunGenerators(compilation).GetRunResult();
+        var runResult = driver.RunGenerators(compilation, TestContext.Current.CancellationToken).GetRunResult();
 
         // All generated files can be found in 'RunResults.GeneratedTrees'.
         var generatedFileSyntax = runResult.GeneratedTrees.Single(t => t.FilePath.EndsWith("CustomerAggregate.PartialMethods.g.cs"));
 
         // Complex generators should be tested using text comparison.
-        Assert.Equal(expectedGeneratedClassText, generatedFileSyntax.GetText().ToString(),
+        Assert.Equal(expectedGeneratedClassText, generatedFileSyntax.GetText(TestContext.Current.CancellationToken).ToString(),
             ignoreLineEndingDifferences: true);
     }
     
