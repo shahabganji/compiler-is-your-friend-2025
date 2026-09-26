@@ -29,7 +29,7 @@ public class MaybeSemanticAnalyzerTests
             source, [CSharpAnalyzerVerifier<MaybeSemanticAnalyzer, DefaultVerifier>.Diagnostic().WithLocation(8, 8)]);
 
         // Assert
-        await analyserTest.RunAsync();
+        await analyserTest.RunAsync(TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -54,7 +54,7 @@ public class MaybeSemanticAnalyzerTests
             source, [CSharpAnalyzerVerifier<MaybeSemanticAnalyzer, DefaultVerifier>.Diagnostic().WithLocation(9, 8)]);
 
         // Assert
-        await analyserTest.RunAsync();
+        await analyserTest.RunAsync(TestContext.Current.CancellationToken);
     }
 
 
@@ -83,7 +83,7 @@ public class MaybeSemanticAnalyzerTests
             source, [CSharpAnalyzerVerifier<MaybeSemanticAnalyzer, DefaultVerifier>.Diagnostic().WithLocation(10, 13)]);
 
         // Assert
-        await analyserTest.RunAsync();
+        await analyserTest.RunAsync(TestContext.Current.CancellationToken);
     }
 
     [Fact]
@@ -111,6 +111,6 @@ public class MaybeSemanticAnalyzerTests
             source, ImmutableArray<DiagnosticResult>.Empty);
 
         // Assert
-        await analyserTest.RunAsync();
+        await analyserTest.RunAsync(TestContext.Current.CancellationToken);
     }
 }

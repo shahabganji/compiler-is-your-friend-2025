@@ -47,6 +47,6 @@ public class MaybeCodeFixProviderTests
             .GetCodeFixAnalyzerForOption<MaybeSemanticAnalyzer, MaybeCodeFixProvider, DefaultVerifier>(
                 source, [expected], newSource);
 
-        await codeFixTester.RunAsync();
+        await codeFixTester.RunAsync(TestContext.Current.CancellationToken);
     }
 }
