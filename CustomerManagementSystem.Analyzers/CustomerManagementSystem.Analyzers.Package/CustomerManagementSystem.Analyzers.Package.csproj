@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <SuppressDependenciesWhenPacking>true</SuppressDependenciesWhenPacking>
+        <NoWarn>$(NoWarn);NU5128</NoWarn>
+        <IsPackable>true</IsPackable>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\CustomerManagementSystem.Analyzers\CustomerManagementSystem.Analyzers.csproj"/>
+        <ProjectReference Include="..\CustomerManagementSystem.CodeFixProviders\CustomerManagementSystem.CodeFixProviders.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- Package the analyzer and code fix provider assemblies into analyzers/dotnet/cs -->
+        <None Include="..\CustomerManagementSystem.Analyzers\bin\$(Configuration)\netstandard2.0\CustomerManagementSystem.Analyzers.dll"
+              Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+        <None Include="..\CustomerManagementSystem.CodeFixProviders\bin\$(Configuration)\netstandard2.0\CustomerManagementSystem.CodeFixProviders.dll"
+              Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    </ItemGroup>
+
+    <Target Name="GetTargetPath"
+            DependsOnTargets="ResolveProjectReferences"
+            Returns="@(TargetPathWithTargetPlatformMoniker)">
+        <ItemGroup>
+            <TargetPathWithTargetPlatformMoniker Include="@(ProjectReference->'%(RootDir)%(Directory)bin\$(Configuration)\netstandard2.0\%(Filename).dll')">
+                <TargetPlatformMoniker>$(TargetPlatformMoniker)</TargetPlatformMoniker>
+            </TargetPathWithTargetPlatformMoniker>
+            <TargetPathWithTargetPlatformMoniker Include="$(TargetPath)" Condition="Exists('$(TargetPath)')">
+                <TargetPlatformMoniker>$(TargetPlatformMoniker)</TargetPlatformMoniker>
+            </TargetPathWithTargetPlatformMoniker>
+        </ItemGroup>
+    </Target>
+
+</Project>
