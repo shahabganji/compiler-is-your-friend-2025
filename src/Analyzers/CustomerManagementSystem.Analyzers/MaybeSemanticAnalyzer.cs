@@ -56,14 +56,12 @@ public class MaybeSemanticAnalyzer : DiagnosticAnalyzer
         if (context.Operation is not IThrowOperation || context.Operation.Syntax is not ThrowStatementSyntax)
             return;
 
-        if (context.Operation.SemanticModel is null)
-            return;
-
-        var containingMethodSyntax = GetContainingMethodSyntax(context.Operation.Syntax);
-        var containingMethodSymbol =
-            context.Operation.SemanticModel.GetDeclaredSymbol(containingMethodSyntax) as IMethodSymbol;
-
-        if (containingMethodSymbol?.ReturnType is not INamedTypeSymbol returnTypeSymbol)
+        // The member that contains the throw. Only ordinary methods have a return type we care about;
+        // throws inside constructors, property accessors, operators, etc. are ignored.
+        if (context.ContainingSymbol is not IMethodSymbol
+            {
+                MethodKind: MethodKind.Ordinary, ReturnType: INamedTypeSymbol returnTypeSymbol
+            })
             return;
 
         context.CancellationToken.ThrowIfCancellationRequested();
@@ -81,14 +79,5 @@ public class MaybeSemanticAnalyzer : DiagnosticAnalyzer
 
         var diagnostic = Diagnostic.Create(Rule, context.Operation.Syntax.GetLocation());
         context.ReportDiagnostic(diagnostic);
-    }
-
-    private MethodDeclarationSyntax GetContainingMethodSyntax(SyntaxNode syntax)
-    {
-        while (true)
-        {
-            if (syntax.Parent is MethodDeclarationSyntax mds) return mds;
-            syntax = syntax.Parent!;
-        }
     }
 }
