@@ -30,7 +30,10 @@ public sealed partial class Customer : IAmAggregateRoot
     {
         Email = @event.Email;
     }
+}
 
+public partial class Customer
+{
     private partial void Apply(RegistrationConfirmed @event)
     {
         IsRegistrationConfirmed = true;
